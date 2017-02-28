@@ -1,0 +1,12 @@
+{
+    "name": "hx-love2d",
+    "classPath": "src",
+    "url" : "https://github.com/redchew/hx-love2d",
+    "license": "BSD",
+    "tags": ["love2d"],
+    "description": "Haxe Extern for Love2D",
+    "version": "0.1.0",
+    "releasenote": "",
+    "contributors": ["redchew"],
+    "dependencies": {}
+}
