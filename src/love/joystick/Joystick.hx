@@ -7,7 +7,7 @@ import lua.UserData;
 extern class Joystick extends Object
 {
 
-	public function getAxes() : Float;
+	public function getAxes() : JoystickGetAxesResult;
 
 	public function getAxis(axis:Float) : Float;
 
@@ -19,18 +19,18 @@ extern class Joystick extends Object
 
 	public function getGamepadAxis(axis:GamepadAxis) : Float;
 
-	@:overload(function (button:GamepadAxis) : JoystickInputType {})
-	public function getGamepadMapping(axis:GamepadAxis) : JoystickInputType;
+	@:overload(function (button:GamepadAxis) : JoystickGetGamepadMappingResult {})
+	public function getGamepadMapping(axis:GamepadAxis) : JoystickGetGamepadMappingResult;
 
 	public function getHat(hat:Float) : JoystickHat;
 
 	public function getHatCount() : Float;
 
-	public function getID() : Float;
+	public function getID() : JoystickGetIDResult;
 
 	public function getName() : String;
 
-	public function getVibration() : Float;
+	public function getVibration() : JoystickGetVibrationResult;
 
 	public function isConnected() : Bool;
 
@@ -45,4 +45,34 @@ extern class Joystick extends Object
 	@:overload(function () : Bool {})
 	@:overload(function (left:Float, right:Float, duration:Float) : Bool {})
 	public function setVibration(left:Float, right:Float) : Bool;
+}
+
+@:multiReturn
+extern class JoystickGetAxesResult
+{
+	var axisDir1 : Float;
+	var axisDir2 : Float;
+	var axisDirN : Float;
+}
+
+@:multiReturn
+extern class JoystickGetIDResult
+{
+	var id : Float;
+	var instanceid : Float;
+}
+
+@:multiReturn
+extern class JoystickGetVibrationResult
+{
+	var left : Float;
+	var right : Float;
+}
+
+@:multiReturn
+extern class JoystickGetGamepadMappingResult
+{
+	var inputtype : JoystickInputType;
+	var inputindex : Float;
+	var hatdirection : JoystickHat;
 }

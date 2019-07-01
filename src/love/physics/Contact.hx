@@ -7,13 +7,13 @@ import lua.UserData;
 extern class Contact extends Object
 {
 
-	public function getFixtures() : Fixture;
+	public function getFixtures() : ContactGetFixturesResult;
 
 	public function getFriction() : Float;
 
-	public function getNormal() : Float;
+	public function getNormal() : ContactGetNormalResult;
 
-	public function getPositions() : Float;
+	public function getPositions() : ContactGetPositionsResult;
 
 	public function getRestitution() : Float;
 
@@ -30,4 +30,27 @@ extern class Contact extends Object
 	public function setFriction(friction:Float) : Void;
 
 	public function setRestitution(restitution:Float) : Void;
+}
+
+@:multiReturn
+extern class ContactGetPositionsResult
+{
+	var x1 : Float;
+	var y1 : Float;
+	var x2 : Float;
+	var y2 : Float;
+}
+
+@:multiReturn
+extern class ContactGetNormalResult
+{
+	var nx : Float;
+	var ny : Float;
+}
+
+@:multiReturn
+extern class ContactGetFixturesResult
+{
+	var fixtureA : Fixture;
+	var fixtureB : Fixture;
 }

@@ -7,11 +7,11 @@ import lua.UserData;
 extern class WheelJoint extends Joint
 {
 
+	public function getAxis() : WheelJointGetAxisResult;
+
 	public function getJointSpeed() : Float;
 
 	public function getJointTranslation() : Float;
-
-	public function getLimits() : Float;
 
 	public function getMaxMotorTorque() : Float;
 
@@ -32,4 +32,11 @@ extern class WheelJoint extends Joint
 	public function setSpringDampingRatio(ratio:Float) : Void;
 
 	public function setSpringFrequency(freq:Float) : Void;
+}
+
+@:multiReturn
+extern class WheelJointGetAxisResult
+{
+	var x : Float;
+	var y : Float;
 }

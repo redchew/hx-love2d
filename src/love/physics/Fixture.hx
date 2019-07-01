@@ -11,21 +11,21 @@ extern class Fixture extends Object
 
 	public function getBody() : Body;
 
-	public function getBoundingBox(?index:Float) : Float;
+	public function getBoundingBox(?index:Float) : FixtureGetBoundingBoxResult;
 
-	public function getCategory() : Float;
+	public function getCategory() : FixtureGetCategoryResult;
 
 	public function getDensity() : Float;
 
-	public function getFilterData() : Float;
+	public function getFilterData() : FixtureGetFilterDataResult;
 
 	public function getFriction() : Float;
 
 	public function getGroupIndex() : Float;
 
-	public function getMask() : Float;
+	public function getMask() : FixtureGetMaskResult;
 
-	public function getMassData() : Float;
+	public function getMassData() : FixtureGetMassDataResult;
 
 	public function getRestitution() : Float;
 
@@ -37,7 +37,7 @@ extern class Fixture extends Object
 
 	public function isSensor() : Bool;
 
-	public function rayCast(x1:Float, y1:Float, x2:Float, y1:Float, maxFraction:Float, ?childIndex:Float) : Float;
+	public function rayCast(x1:Float, y1:Float, x2:Float, y2:Float, maxFraction:Float, ?childIndex:Float) : FixtureRayCastResult;
 
 	public function setCategory(category1:Float, category2:Float, args:Rest<Float>) : Void;
 
@@ -58,4 +58,52 @@ extern class Fixture extends Object
 	public function setUserData(value:Dynamic) : Void;
 
 	public function testPoint(x:Float, y:Float) : Bool;
+}
+
+@:multiReturn
+extern class FixtureGetCategoryResult
+{
+	var category1 : Float;
+	var category2 : Float;
+}
+
+@:multiReturn
+extern class FixtureRayCastResult
+{
+	var x : Float;
+	var y : Float;
+	var fraction : Float;
+}
+
+@:multiReturn
+extern class FixtureGetBoundingBoxResult
+{
+	var topLeftX : Float;
+	var topLeftY : Float;
+	var bottomRightX : Float;
+	var bottomRightY : Float;
+}
+
+@:multiReturn
+extern class FixtureGetFilterDataResult
+{
+	var categories : Float;
+	var mask : Float;
+	var group : Float;
+}
+
+@:multiReturn
+extern class FixtureGetMassDataResult
+{
+	var x : Float;
+	var y : Float;
+	var mass : Float;
+	var inertia : Float;
+}
+
+@:multiReturn
+extern class FixtureGetMaskResult
+{
+	var mask1 : Float;
+	var mask2 : Float;
 }

@@ -8,4 +8,6 @@ extern class RopeJoint extends Joint
 {
 
 	public function getMaxLength() : Float;
+
+	public function setMaxLength(maxLength:Float) : Void;
 }

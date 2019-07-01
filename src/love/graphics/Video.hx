@@ -8,9 +8,9 @@ import lua.UserData;
 extern class Video extends Drawable
 {
 
-	public function getDimensions() : Float;
+	public function getDimensions() : VideoGetDimensionsResult;
 
-	public function getFilter() : FilterMode;
+	public function getFilter() : VideoGetFilterResult;
 
 	public function getHeight() : Float;
 
@@ -35,4 +35,19 @@ extern class Video extends Drawable
 	public function setSource(?source:Source) : Void;
 
 	public function tell(seconds:Float) : Void;
+}
+
+@:multiReturn
+extern class VideoGetFilterResult
+{
+	var min : FilterMode;
+	var mag : FilterMode;
+	var anisotropy : Float;
+}
+
+@:multiReturn
+extern class VideoGetDimensionsResult
+{
+	var width : Float;
+	var height : Float;
 }

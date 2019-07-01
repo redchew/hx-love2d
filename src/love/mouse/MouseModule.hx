@@ -11,7 +11,7 @@ extern class MouseModule
 
 	public static function getCursor() : Cursor;
 
-	public static function getPosition() : Float;
+	public static function getPosition() : MouseModuleGetPositionResult;
 
 	public static function getRelativeMode() : Bool;
 
@@ -22,6 +22,8 @@ extern class MouseModule
 	public static function getY() : Float;
 
 	public static function hasCursor() : Bool;
+
+	public static function isCursorSupported() : Bool;
 
 	public static function isDown(button:Float, args:Rest<Float>) : Bool;
 
@@ -47,4 +49,11 @@ extern class MouseModule
 	public static function setX(x:Float) : Void;
 
 	public static function setY(y:Float) : Void;
+}
+
+@:multiReturn
+extern class MouseModuleGetPositionResult
+{
+	var x : Float;
+	var y : Float;
 }

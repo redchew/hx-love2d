@@ -9,7 +9,7 @@ extern class SoundData extends Data
 
 	public function getBitDepth() : Float;
 
-	public function getChannels() : Float;
+	public function getChannelCount() : Float;
 
 	public function getDuration() : Float;
 

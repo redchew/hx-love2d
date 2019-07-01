@@ -37,23 +37,23 @@ extern class Body extends Object
 
 	public function getLinearDamping() : Float;
 
-	public function getLinearVelocity() : Float;
+	public function getLinearVelocity() : BodyGetLinearVelocityResult;
 
-	public function getLinearVelocityFromLocalPoint(x:Float, y:Float) : Float;
+	public function getLinearVelocityFromLocalPoint(x:Float, y:Float) : BodyGetLinearVelocityFromLocalPointResult;
 
-	public function getLinearVelocityFromWorldPoint(x:Float, y:Float) : Float;
+	public function getLinearVelocityFromWorldPoint(x:Float, y:Float) : BodyGetLinearVelocityFromWorldPointResult;
 
-	public function getLocalCenter() : Float;
+	public function getLocalCenter() : BodyGetLocalCenterResult;
 
-	public function getLocalPoint(worldX:Float, worldY:Float) : Float;
+	public function getLocalPoint(worldX:Float, worldY:Float) : BodyGetLocalPointResult;
 
-	public function getLocalVector(worldX:Float, worldY:Float) : Float;
+	public function getLocalVector(worldX:Float, worldY:Float) : BodyGetLocalVectorResult;
 
 	public function getMass() : Float;
 
-	public function getMassData() : Float;
+	public function getMassData() : BodyGetMassDataResult;
 
-	public function getPosition() : Float;
+	public function getPosition() : BodyGetPositionResult;
 
 	public function getType() : BodyType;
 
@@ -61,13 +61,13 @@ extern class Body extends Object
 
 	public function getWorld() : World;
 
-	public function getWorldCenter() : Float;
+	public function getWorldCenter() : BodyGetWorldCenterResult;
 
-	public function getWorldPoint(localX:Float, localY:Float) : Float;
+	public function getWorldPoint(localX:Float, localY:Float) : BodyGetWorldPointResult;
 
-	public function getWorldPoints(x1:Float, y1:Float, x2:Float, y2:Float, args:Rest<Float>) : Float;
+	public function getWorldPoints(x1:Float, y1:Float, x2:Float, y2:Float, args:Rest<Float>) : BodyGetWorldPointsResult;
 
-	public function getWorldVector(localX:Float, localY:Float) : Float;
+	public function getWorldVector(localX:Float, localY:Float) : BodyGetWorldVectorResult;
 
 	public function getX() : Float;
 
@@ -124,4 +124,92 @@ extern class Body extends Object
 	public function setX(x:Float) : Void;
 
 	public function setY(y:Float) : Void;
+}
+
+@:multiReturn
+extern class BodyGetLocalPointResult
+{
+	var localX : Float;
+	var localY : Float;
+}
+
+@:multiReturn
+extern class BodyGetLinearVelocityFromLocalPointResult
+{
+	var vx : Float;
+	var vy : Float;
+}
+
+@:multiReturn
+extern class BodyGetWorldVectorResult
+{
+	var worldX : Float;
+	var worldY : Float;
+}
+
+@:multiReturn
+extern class BodyGetLinearVelocityResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class BodyGetWorldPointResult
+{
+	var worldX : Float;
+	var worldY : Float;
+}
+
+@:multiReturn
+extern class BodyGetLocalVectorResult
+{
+	var localX : Float;
+	var localY : Float;
+}
+
+@:multiReturn
+extern class BodyGetLinearVelocityFromWorldPointResult
+{
+	var vx : Float;
+	var vy : Float;
+}
+
+@:multiReturn
+extern class BodyGetWorldCenterResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class BodyGetPositionResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class BodyGetWorldPointsResult
+{
+	var x1 : Float;
+	var y1 : Float;
+	var x2 : Float;
+	var y2 : Float;
+}
+
+@:multiReturn
+extern class BodyGetMassDataResult
+{
+	var x : Float;
+	var y : Float;
+	var mass : Float;
+	var inertia : Float;
+}
+
+@:multiReturn
+extern class BodyGetLocalCenterResult
+{
+	var x : Float;
+	var y : Float;
 }

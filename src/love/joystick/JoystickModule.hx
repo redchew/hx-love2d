@@ -18,6 +18,6 @@ extern class JoystickModule
 	@:overload(function () : String {})
 	public static function saveGamepadMappings(filename:String) : String;
 
-	@:overload(function (guid:String, button:GamepadButton, inputtype:JoystickInputType, inputindex:Float, hatdirection:JoystickHat) : Bool {})
+	@:overload(function (guid:String, axis:GamepadAxis, inputtype:JoystickInputType, inputindex:Float, hatdirection:JoystickHat) : Bool {})
 	public static function setGamepadMapping(guid:String, button:GamepadButton, inputtype:JoystickInputType, inputindex:Float, hatdirection:JoystickHat) : Bool;
 }

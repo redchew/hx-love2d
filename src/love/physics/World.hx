@@ -13,7 +13,7 @@ extern class World extends Object
 
 	public function getBodyList() : Table<Dynamic,Dynamic>;
 
-	public function getCallbacks() : Dynamic;
+	public function getCallbacks() : WorldGetCallbacksResult;
 
 	public function getContactCount() : Float;
 
@@ -21,7 +21,7 @@ extern class World extends Object
 
 	public function getContactList() : Table<Dynamic,Dynamic>;
 
-	public function getGravity() : Float;
+	public function getGravity() : WorldGetGravityResult;
 
 	public function getJointCount() : Float;
 
@@ -47,5 +47,21 @@ extern class World extends Object
 
 	public function translateOrigin(x:Float, y:Float) : Void;
 
-	public function update(dt:Float) : Void;
+	public function update(dt:Float, ?velocityiterations:Float, ?positioniterations:Float) : Void;
+}
+
+@:multiReturn
+extern class WorldGetGravityResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class WorldGetCallbacksResult
+{
+	var beginContact : Dynamic;
+	var endContact : Dynamic;
+	var preSolve : Dynamic;
+	var postSolve : Dynamic;
 }

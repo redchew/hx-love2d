@@ -2,9 +2,10 @@ package love.graphics;
 import love.Data;
 import love.Drawable;
 import love.filesystem.File;
-import love.filesystem.FileData;
 import love.image.CompressedImageData;
 import love.image.ImageData;
+import love.math.Transform;
+import love.thread.Channel;
 import love.video.VideoStream;
 import haxe.extern.Rest;
 import lua.Table;
@@ -17,7 +18,14 @@ extern class GraphicsModule
 	@:overload(function (drawmode:DrawMode, arctype:ArcType, x:Float, y:Float, radius:Float, angle1:Float, angle2:Float, ?segments:Float) : Void {})
 	public static function arc(drawmode:DrawMode, x:Float, y:Float, radius:Float, angle1:Float, angle2:Float, ?segments:Float) : Void;
 
-	public static function circle(mode:DrawMode, x:Float, y:Float, radius:Float, ?segments:Float) : Void;
+	public static function applyTransform(transform:Transform) : Void;
+
+	@:overload(function (callback:Dynamic) : Void {})
+	@:overload(function (channel:Channel) : Void {})
+	public static function captureScreenshot(filename:String) : Void;
+
+	@:overload(function (mode:DrawMode, x:Float, y:Float, radius:Float, segments:Float) : Void {})
+	public static function circle(mode:DrawMode, x:Float, y:Float, radius:Float) : Void;
 
 	@:overload(function (r:Float, g:Float, b:Float, ?a:Float) : Void {})
 	@:overload(function (color:Table<Dynamic,Dynamic>, args:Rest<Table<Dynamic,Dynamic>>) : Void {})
@@ -29,30 +37,45 @@ extern class GraphicsModule
 	@:overload(function (texture:Texture, quad:Quad, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
 	public static function draw(drawable:Drawable, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
 
+	@:overload(function (mesh:Mesh, instancecount:Float, transform:Transform) : Void {})
+	public static function drawInstanced(mesh:Mesh, instancecount:Float, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
+
+	@:overload(function (texture:Texture, layerindex:Float, quad:Quad, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
+	@:overload(function (texture:Texture, layerindex:Float, transform:Transform) : Void {})
+	@:overload(function (texture:Texture, layerindex:Float, quad:Quad, transform:Transform) : Void {})
+	public static function drawLayer(texture:Texture, layerindex:Float, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
+
 	@:overload(function (mode:DrawMode, x:Float, y:Float, radiusx:Float, radiusy:Float, segments:Float) : Void {})
 	public static function ellipse(mode:DrawMode, x:Float, y:Float, radiusx:Float, radiusy:Float) : Void;
 
-	public static function getBackgroundColor() : Float;
+	public static function flushBatch() : Void;
 
-	public static function getBlendMode() : BlendMode;
+	public static function getBackgroundColor() : GraphicsModuleGetBackgroundColorResult;
+
+	public static function getBlendMode() : GraphicsModuleGetBlendModeResult;
 
 	public static function getCanvas() : Canvas;
 
-	public static function getCanvasFormats() : Table<Dynamic,Dynamic>;
+	@:overload(function () : Table<Dynamic,Dynamic> {})
+	public static function getCanvasFormats(readable:Bool) : Table<Dynamic,Dynamic>;
 
-	public static function getColor() : Float;
+	public static function getColor() : GraphicsModuleGetColorResult;
 
-	public static function getColorMask() : Bool;
+	public static function getColorMask() : GraphicsModuleGetColorMaskResult;
 
-	public static function getCompressedImageFormats() : Table<Dynamic,Dynamic>;
+	public static function getDefaultFilter() : GraphicsModuleGetDefaultFilterResult;
 
-	public static function getDefaultFilter() : FilterMode;
+	public static function getDepthMode() : GraphicsModuleGetDepthModeResult;
 
-	public static function getDimensions() : Float;
+	public static function getDimensions() : GraphicsModuleGetDimensionsResult;
 
 	public static function getFont() : Font;
 
+	public static function getFrontFaceWinding() : VertexWinding;
+
 	public static function getHeight() : Float;
+
+	public static function getImageFormats() : Table<Dynamic,Dynamic>;
 
 	public static function getLineJoin() : LineJoin;
 
@@ -60,11 +83,15 @@ extern class GraphicsModule
 
 	public static function getLineWidth() : Float;
 
+	public static function getMeshCullMode() : CullMode;
+
 	public static function getShader() : Shader;
 
-	public static function getStats() : Float;
+	public static function getStackDepth() : Float;
 
-	public static function getStencilTest() : Bool;
+	public static function getStats() : Table<Dynamic,Dynamic>;
+
+	public static function getStencilTest() : GraphicsModuleGetStencilTestResult;
 
 	public static function getSupported() : Table<Dynamic,Dynamic>;
 
@@ -72,13 +99,18 @@ extern class GraphicsModule
 
 	public static function getPointSize() : Float;
 
-	public static function getRendererInfo() : String;
+	public static function getRendererInfo() : GraphicsModuleGetRendererInfoResult;
 
-	public static function getScissor() : Float;
+	public static function getScissor() : GraphicsModuleGetScissorResult;
+
+	public static function getTextureTypes() : Table<Dynamic,Dynamic>;
 
 	public static function getWidth() : Float;
 
+	@:overload(function () : Void {})
 	public static function intersectScissor(x:Float, y:Float, width:Float, height:Float) : Void;
+
+	public static function inverseTransformPoint(screenX:Float, screenY:Float) : GraphicsModuleInverseTransformPointResult;
 
 	public static function isGammaCorrect() : Bool;
 
@@ -89,10 +121,10 @@ extern class GraphicsModule
 
 	public static function newCanvas(?width:Float, ?height:Float, ?format:CanvasFormat, ?msaa:Float) : Canvas;
 
-	@:overload(function (file:File, ?size:Float) : Font {})
-	@:overload(function (filedata:FileData, ?size:Float) : Font {})
-	@:overload(function (?size:Float) : Font {})
-	public static function newFont(filename:String, ?size:Float) : Font;
+	@:overload(function (filename:String, size:Float) : Font {})
+	@:overload(function (filename:String, imagefilename:String) : Font {})
+	@:overload(function (size:Float) : Font {})
+	public static function newFont(filename:String) : Font;
 
 	@:overload(function (vertexcount:Float, ?mode:MeshDrawMode, ?usage:SpriteBatchUsage) : Mesh {})
 	@:overload(function (vertexformat:Table<Dynamic,Dynamic>, vertices:Table<Dynamic,Dynamic>, ?mode:MeshDrawMode, ?usage:SpriteBatchUsage) : Mesh {})
@@ -104,9 +136,11 @@ extern class GraphicsModule
 	@:overload(function (filename:String, flags:Table<Dynamic,Dynamic>) : Image {})
 	public static function newImage(filename:String) : Image;
 
-	public static function newImageFont(filename:String, glyphs:String, ?extraspacing:Float) : Font;
+	@:overload(function (imageData:ImageData, glyphs:String) : Font {})
+	@:overload(function (filename:String, glyphs:String, ?extraspacing:Float) : Font {})
+	public static function newImageFont(filename:String, glyphs:String) : Font;
 
-	public static function newParticleSystem(texture:Texture, buffer:Float) : ParticleSystem;
+	public static function newParticleSystem(texture:Texture, ?buffer:Float) : ParticleSystem;
 
 	@:overload(function (pixelcode:String, vertexcode:String) : Shader {})
 	public static function newShader(code:String) : Shader;
@@ -114,8 +148,6 @@ extern class GraphicsModule
 	public static function newText(font:Font, ?textstring:String) : Text;
 
 	public static function newQuad(x:Float, y:Float, width:Float, height:Float, sw:Float, sh:Float) : Quad;
-
-	public static function newScreenshot(?copyAlpha:Bool) : ImageData;
 
 	public static function newSpriteBatch(texture:Texture, ?maxsprites:Float, ?usage:SpriteBatchUsage) : SpriteBatch;
 
@@ -135,8 +167,8 @@ extern class GraphicsModule
 
 	public static function present() : Void;
 
-	@:overload(function (coloredtext:Table<Dynamic,Dynamic>, x:Float, y:Float, ?angle:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
-	public static function print(text:String, x:Float, y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
+	@:overload(function (coloredtext:Table<Dynamic,Dynamic>, ?x:Float, ?y:Float, ?angle:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
+	public static function print(text:String, ?x:Float, ?y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
 
 	@:overload(function (coloredtext:Table<Dynamic,Dynamic>, x:Float, y:Float, wraplimit:Float, align:AlignMode, ?angle:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
 	public static function printf(text:String, x:Float, y:Float, limit:Float, ?align:AlignMode, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
@@ -145,6 +177,8 @@ extern class GraphicsModule
 
 	@:overload(function (mode:DrawMode, x:Float, y:Float, width:Float, height:Float, rx:Float, ?ry:Float, ?segments:Float) : Void {})
 	public static function rectangle(mode:DrawMode, x:Float, y:Float, width:Float, height:Float) : Void;
+
+	public static function replaceTransform(transform:Transform) : Void;
 
 	public static function reset() : Void;
 
@@ -158,24 +192,31 @@ extern class GraphicsModule
 	@:overload(function (mode:BlendMode, ?alphamode:BlendAlphaMode) : Void {})
 	public static function setBlendMode(mode:BlendMode) : Void;
 
-	@:overload(function (canvas:Canvas, args:Rest<Canvas>) : Void {})
-	public static function setCanvas() : Void;
+	@:overload(function () : Void {})
+	@:overload(function (canvas1:Canvas, canvas2:Canvas, args:Rest<Canvas>) : Void {})
+	public static function setCanvas(canvas:Canvas) : Void;
 
 	@:overload(function (rgba:Table<Dynamic,Dynamic>) : Void {})
 	public static function setColor(red:Float, green:Float, blue:Float, alpha:Float) : Void;
 
-	@:overload(function (red:Bool, green:Bool, blue:Bool, alpha:Bool) : Void {})
-	public static function setColorMask() : Void;
+	@:overload(function () : Void {})
+	public static function setColorMask(red:Bool, green:Bool, blue:Bool, alpha:Bool) : Void;
 
 	public static function setDefaultFilter(min:FilterMode, ?mag:FilterMode, ?anisotropy:Float) : Void;
 
+	public static function setDepthMode(comparemode:CompareMode, write:Bool) : Void;
+
 	public static function setFont(font:Font) : Void;
+
+	public static function setFrontFaceWinding(winding:VertexWinding) : Void;
 
 	public static function setLineJoin(join:LineJoin) : Void;
 
 	public static function setLineStyle(style:LineStyle) : Void;
 
 	public static function setLineWidth(width:Float) : Void;
+
+	public static function setMeshCullMode(mode:CullMode) : Void;
 
 	@:overload(function (file:File, ?size:Float) : Font {})
 	@:overload(function (data:Data, ?size:Float) : Font {})
@@ -198,5 +239,112 @@ extern class GraphicsModule
 
 	public static function stencil(stencilfunction:Dynamic, ?action:StencilAction, ?value:Float, ?keepvalues:Bool) : Void;
 
+	public static function transformPoint(globalX:Float, globalY:Float) : GraphicsModuleTransformPointResult;
+
 	public static function translate(dx:Float, dy:Float) : Void;
+
+	@:overload(function (gles:Bool, pixelcode:String, vertexcode:String) : GraphicsModuleValidateShaderResult {})
+	public static function validateShader(gles:Bool, code:String) : GraphicsModuleValidateShaderResult;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetColorMaskResult
+{
+	var r : Bool;
+	var g : Bool;
+	var b : Bool;
+	var a : Bool;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetDefaultFilterResult
+{
+	var min : FilterMode;
+	var mag : FilterMode;
+	var anisotropy : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetBackgroundColorResult
+{
+	var r : Float;
+	var g : Float;
+	var b : Float;
+	var a : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetRendererInfoResult
+{
+	var name : String;
+	var version : String;
+	var vendor : String;
+	var device : String;
+}
+
+@:multiReturn
+extern class GraphicsModuleValidateShaderResult
+{
+	var status : Bool;
+	var message : String;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetDepthModeResult
+{
+	var comparemode : CompareMode;
+	var write : Bool;
+}
+
+@:multiReturn
+extern class GraphicsModuleTransformPointResult
+{
+	var screenX : Float;
+	var sreenY : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleInverseTransformPointResult
+{
+	var globalX : Float;
+	var globalY : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetStencilTestResult
+{
+	var enabled : Bool;
+	var inverted : Bool;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetScissorResult
+{
+	var x : Float;
+	var y : Float;
+	var width : Float;
+	var height : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetBlendModeResult
+{
+	var mode : BlendMode;
+	var alphamode : BlendAlphaMode;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetColorResult
+{
+	var r : Float;
+	var g : Float;
+	var b : Float;
+	var a : Float;
+}
+
+@:multiReturn
+extern class GraphicsModuleGetDimensionsResult
+{
+	var width : Float;
+	var height : Float;
 }

@@ -12,7 +12,7 @@ extern class SystemModule
 
 	public static function getOS() : String;
 
-	public static function getPowerInfo() : PowerState;
+	public static function getPowerInfo() : SystemModuleGetPowerInfoResult;
 
 	public static function getProcessorCount() : Float;
 
@@ -21,4 +21,12 @@ extern class SystemModule
 	public static function setClipboardText(text:String) : Void;
 
 	public static function vibrate(?seconds:Float) : Void;
+}
+
+@:multiReturn
+extern class SystemModuleGetPowerInfoResult
+{
+	var state : PowerState;
+	var percent : Float;
+	var seconds : Float;
 }

@@ -16,7 +16,19 @@ extern class EventModule
 
 	public static function push(e:Event, ?a:Dynamic, ?b:Dynamic, ?c:Dynamic, ?d:Dynamic) : Void;
 
-	public static function quit(?exitstatus:Float) : Void;
+	@:overload(function (?exitstatus:Float) : Void {})
+	@:overload(function (restart:String) : Void {})
+	public static function quit() : Void;
 
-	public static function wait() : Event;
+	public static function wait() : EventModuleWaitResult;
+}
+
+@:multiReturn
+extern class EventModuleWaitResult
+{
+	var e : Event;
+	var a : Dynamic;
+	var b : Dynamic;
+	var c : Dynamic;
+	var d : Dynamic;
 }

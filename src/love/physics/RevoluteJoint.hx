@@ -7,6 +7,8 @@ import lua.UserData;
 extern class RevoluteJoint extends Joint
 {
 
+	public function areLimitsEnabled() : Bool;
+
 	public function setLimitsEnabled(enable:Bool) : Void;
 
 	public function setMotorEnabled(enable:Bool) : Void;
@@ -15,7 +17,7 @@ extern class RevoluteJoint extends Joint
 
 	public function getJointSpeed() : Float;
 
-	public function getLimits() : Float;
+	public function getLimits() : RevoluteJointGetLimitsResult;
 
 	public function getLowerLimit() : Float;
 
@@ -26,8 +28,6 @@ extern class RevoluteJoint extends Joint
 	public function getMotorTorque() : Float;
 
 	public function getUpperLimit() : Float;
-
-	public function hasLimitsEnabled() : Bool;
 
 	public function isMotorEnabled() : Bool;
 
@@ -40,4 +40,11 @@ extern class RevoluteJoint extends Joint
 	public function setMotorSpeed(s:Float) : Void;
 
 	public function setUpperLimit(upper:Float) : Void;
+}
+
+@:multiReturn
+extern class RevoluteJointGetLimitsResult
+{
+	var lower : Float;
+	var upper : Float;
 }

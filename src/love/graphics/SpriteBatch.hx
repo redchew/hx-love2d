@@ -18,7 +18,7 @@ extern class SpriteBatch extends Drawable
 
 	public function getBufferSize() : Float;
 
-	public function getColor() : Float;
+	public function getColor() : SpriteBatchGetColorResult;
 
 	public function getCount() : Float;
 
@@ -27,10 +27,20 @@ extern class SpriteBatch extends Drawable
 	@:overload(function (id:Float, quad:Quad, x:Float, y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void {})
 	public function set(id:Float, x:Float, y:Float, ?r:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Void;
 
-	public function setBufferSize(size:Float) : Void;
-
 	@:overload(function () : Void {})
 	public function setColor(r:Float, g:Float, b:Float, ?a:Float) : Void;
 
+	@:overload(function () : Void {})
+	public function setDrawRange(start:Float, count:Float) : Void;
+
 	public function setTexture(texture:Texture) : Void;
+}
+
+@:multiReturn
+extern class SpriteBatchGetColorResult
+{
+	var r : Float;
+	var g : Float;
+	var b : Float;
+	var a : Float;
 }

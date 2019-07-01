@@ -9,16 +9,18 @@ extern class Mesh extends Drawable
 
 	public function attachAttribute(name:String, mesh:Mesh) : Void;
 
+	public function detachAttribute(name:String) : Bool;
+
 	public function getDrawMode() : MeshDrawMode;
 
-	public function getDrawRange() : Float;
+	public function getDrawRange() : MeshGetDrawRangeResult;
 
 	public function getTexture() : Texture;
 
-	@:overload(function (index:Float) : Float {})
-	public function getVertex(index:Float) : Float;
+	@:overload(function (index:Float) : MeshGetVertexResult {})
+	public function getVertex(index:Float) : MeshGetVertexResult;
 
-	public function getVertexAttribute(vertexindex:Float, attributeindex:Float) : Float;
+	public function getVertexAttribute(vertexindex:Float, attributeindex:Float) : MeshGetVertexAttributeResult;
 
 	public function getVertexCount() : Float;
 
@@ -45,11 +47,36 @@ extern class Mesh extends Drawable
 
 	public function setVertexAttribute(vertexindex:Float, attributeindex:Float, value1:Float, value2:Float, args:Rest<Float>) : Void;
 
-	public function setVertexColors(on:Bool) : Void;
-
 	@:overload(function (vi1:Float, vi2:Float, vi3:Float) : Void {})
 	public function setVertexMap(map:Table<Dynamic,Dynamic>) : Void;
 
 	@:overload(function (vertices:Table<Dynamic,Dynamic>) : Void {})
 	public function setVertices(vertices:Table<Dynamic,Dynamic>) : Void;
+}
+
+@:multiReturn
+extern class MeshGetVertexAttributeResult
+{
+	var value1 : Float;
+	var value2 : Float;
+}
+
+@:multiReturn
+extern class MeshGetDrawRangeResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class MeshGetVertexResult
+{
+	var x : Float;
+	var y : Float;
+	var u : Float;
+	var v : Float;
+	var r : Float;
+	var g : Float;
+	var b : Float;
+	var a : Float;
 }

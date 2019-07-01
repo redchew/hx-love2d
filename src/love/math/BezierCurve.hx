@@ -7,9 +7,9 @@ import lua.UserData;
 extern class BezierCurve extends Object
 {
 
-	public function evalulate(t:Float) : Float;
+	public function evaluate(t:Float) : BezierCurveEvaluateResult;
 
-	public function getControlPoint(i:Float) : Float;
+	public function getControlPoint(i:Float) : BezierCurveGetControlPointResult;
 
 	public function getControlPointCount() : Float;
 
@@ -34,4 +34,18 @@ extern class BezierCurve extends Object
 	public function setControlPoint(i:Float, ox:Float, oy:Float) : Void;
 
 	public function translate(dx:Float, dy:Float) : Void;
+}
+
+@:multiReturn
+extern class BezierCurveEvaluateResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class BezierCurveGetControlPointResult
+{
+	var x : Float;
+	var y : Float;
 }

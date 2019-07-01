@@ -7,14 +7,13 @@ import lua.UserData;
 extern class Shader extends Object
 {
 
-	public function getExternVariable(name:String) : String;
-
 	public function getWarnings() : String;
+
+	public function hasUniform(name:String) : Bool;
 
 	@:overload(function (name:String, vector:Table<Dynamic,Dynamic>, args:Rest<Table<Dynamic,Dynamic>>) : Void {})
 	@:overload(function (name:String, matrix:Table<Dynamic,Dynamic>, args:Rest<Table<Dynamic,Dynamic>>) : Void {})
-	@:overload(function (name:String, image:Image, args:Rest<Image>) : Void {})
-	@:overload(function (name:String, canvas:Canvas, args:Rest<Canvas>) : Void {})
+	@:overload(function (name:String, texture:Texture) : Void {})
 	@:overload(function (name:String, boolean:Bool, args:Rest<Bool>) : Void {})
 	public function send(name:String, number:Float, args:Rest<Float>) : Void;
 

@@ -13,11 +13,11 @@ extern class ParticleSystem extends Drawable
 
 	public function getCount() : Float;
 
-	public function getAreaSpread() : AreaSpreadDistribution;
+	public function getAreaSpread() : ParticleSystemGetAreaSpreadResult;
 
 	public function getBufferSize() : Float;
 
-	public function getColors() : Float;
+	public function getColors() : ParticleSystemGetColorsResult;
 
 	public function getDirection() : Float;
 
@@ -25,29 +25,31 @@ extern class ParticleSystem extends Drawable
 
 	public function getInsertMode() : ParticleInsertMode;
 
-	public function getLinearAcceleration() : Float;
+	public function getLinearAcceleration() : ParticleSystemGetLinearAccelerationResult;
 
-	public function getLinearDamping() : Float;
+	public function getLinearDamping() : ParticleSystemGetLinearDampingResult;
 
 	public function getEmitterLifetime() : Float;
 
-	public function getOffset() : Float;
+	public function getOffset() : ParticleSystemGetOffsetResult;
 
-	public function getParticleLifetime() : Float;
+	public function getParticleLifetime() : ParticleSystemGetParticleLifetimeResult;
 
-	public function getPosition() : Float;
+	public function getQuads() : Table<Dynamic,Dynamic>;
 
-	public function getRadialAcceleration() : Float;
+	public function getPosition() : ParticleSystemGetPositionResult;
 
-	public function getRotation() : Float;
+	public function getRadialAcceleration() : ParticleSystemGetRadialAccelerationResult;
 
-	public function getSizes() : Float;
+	public function getRotation() : ParticleSystemGetRotationResult;
+
+	public function getSizes() : ParticleSystemGetSizesResult;
 
 	public function getSizeVariation() : Float;
 
-	public function getSpeed() : Float;
+	public function getSpeed() : ParticleSystemGetSpeedResult;
 
-	public function getSpin() : Float;
+	public function getSpin() : ParticleSystemGetSpinResult;
 
 	public function getSpinVariation() : Float;
 
@@ -55,7 +57,7 @@ extern class ParticleSystem extends Drawable
 
 	public function getTexture() : Texture;
 
-	public function getTangentialAcceleration() : Float;
+	public function getTangentialAcceleration() : ParticleSystemGetTangentialAccelerationResult;
 
 	public function hasRelativeRotation() : Bool;
 
@@ -95,6 +97,7 @@ extern class ParticleSystem extends Drawable
 
 	public function setPosition(x:Float, y:Float) : Void;
 
+	@:overload(function (quads:Table<Dynamic,Dynamic>) : Void {})
 	public function setQuads(quad1:Quad, quad2:Quad) : Void;
 
 	public function setRadialAcceleration(min:Float, ?max:Float) : Void;
@@ -124,4 +127,104 @@ extern class ParticleSystem extends Drawable
 	public function stop() : Void;
 
 	public function update(dt:Float) : Void;
+}
+
+@:multiReturn
+extern class ParticleSystemGetLinearAccelerationResult
+{
+	var xmin : Float;
+	var ymin : Float;
+	var xmax : Float;
+	var ymax : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetSpeedResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetRadialAccelerationResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetOffsetResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetLinearDampingResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetRotationResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetParticleLifetimeResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetTangentialAccelerationResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetColorsResult
+{
+	var r1 : Float;
+	var g1 : Float;
+	var b1 : Float;
+	var a1 : Float;
+	var r2 : Float;
+	var g2 : Float;
+	var b2 : Float;
+	var a2 : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetPositionResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetSpinResult
+{
+	var min : Float;
+	var max : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetSizesResult
+{
+	var size1 : Float;
+	var size2 : Float;
+}
+
+@:multiReturn
+extern class ParticleSystemGetAreaSpreadResult
+{
+	var distribution : AreaSpreadDistribution;
+	var dx : Float;
+	var dy : Float;
 }

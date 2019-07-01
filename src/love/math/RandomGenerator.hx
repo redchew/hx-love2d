@@ -7,7 +7,7 @@ import lua.UserData;
 extern class RandomGenerator extends Object
 {
 
-	public function getSeed() : Float;
+	public function getSeed() : RandomGeneratorGetSeedResult;
 
 	public function getState() : String;
 
@@ -21,4 +21,11 @@ extern class RandomGenerator extends Object
 	public function setSeed(seed:Float) : Void;
 
 	public function setState(state:String) : Void;
+}
+
+@:multiReturn
+extern class RandomGeneratorGetSeedResult
+{
+	var low : Float;
+	var high : Float;
 }
