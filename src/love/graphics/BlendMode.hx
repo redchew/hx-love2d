@@ -10,4 +10,8 @@ abstract BlendMode (String)
 	var Multiply = "multiply";
 	var Lighten = "lighten";
 	var Darken = "darken";
+	var Additive = "additive";
+	var Subtractive = "subtractive";
+	var Multiplicative = "multiplicative";
+	var Premultiplied = "premultiplied";
 }

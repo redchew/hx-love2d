@@ -29,11 +29,10 @@ extern class Text extends Drawable
 	@:overload(function (coloredtext:Table<Dynamic,Dynamic>) : Void {})
 	public function set(textstring:String) : Void;
 
-	@:overload(function (coloredtext:Table<Dynamic,Dynamic>, wraplimit:Float, align:AlignMode) : Void {})
-	@:overload(function () : Void {})
-	public function setf(textstring:String, wraplimit:Float, align:AlignMode) : Void;
-
 	public function setFont(font:Font) : Void;
+
+	@:overload(function (coloredtext:Table<Dynamic,Dynamic>, wraplimit:Float, align:AlignMode) : Void {})
+	public function setf(textstring:String, wraplimit:Float, align:AlignMode) : Void;
 }
 
 @:multiReturn

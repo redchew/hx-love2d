@@ -25,18 +25,19 @@ extern class MouseModule
 
 	public static function isCursorSupported() : Bool;
 
+	@:overload(function (buttonN:MouseConstant) : Bool {})
 	public static function isDown(button:Float, args:Rest<Float>) : Bool;
 
 	public static function isGrabbed() : Bool;
 
 	public static function isVisible() : Bool;
 
-	@:overload(function (filepath:String, ?hotx:Float, ?hoty:Float) : Cursor {})
+	@:overload(function (filename:String, ?hotx:Float, ?hoty:Float) : Cursor {})
 	@:overload(function (fileData:FileData, ?hotx:Float, ?hoty:Float) : Cursor {})
 	public static function newCursor(imageData:ImageData, ?hotx:Float, ?hoty:Float) : Cursor;
 
-	@:overload(function (cursor:Cursor) : Void {})
-	public static function setCursor() : Void;
+	@:overload(function () : Void {})
+	public static function setCursor(cursor:Cursor) : Void;
 
 	public static function setGrabbed(grab:Bool) : Void;
 

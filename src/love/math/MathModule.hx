@@ -8,10 +8,14 @@ import lua.UserData;
 extern class MathModule
 {
 
+	public static function colorFromBytes(rb:Float, gb:Float, bb:Float, ?ab:Float) : MathModuleColorFromBytesResult;
+
+	public static function colorToBytes(r:Float, g:Float, b:Float, ?a:Float) : MathModuleColorToBytesResult;
+
 	@:overload(function (data:Data, ?format:CompressedDataFormat, ?level:Float) : CompressedData {})
 	public static function compress(rawstring:String, ?format:CompressedDataFormat, ?level:Float) : CompressedData;
 
-	@:overload(function (compressedString:String, format:CompressedDataFormat) : String {})
+	@:overload(function (compressedstring:String, format:CompressedDataFormat) : String {})
 	@:overload(function (data:Data, format:CompressedDataFormat) : String {})
 	public static function decompress(compressedData:CompressedData) : String;
 
@@ -23,14 +27,14 @@ extern class MathModule
 
 	public static function getRandomState() : String;
 
-	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, args:Rest<Float>) : Bool {})
+	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float) : Bool {})
 	public static function isConvex(vertices:Table<Dynamic,Dynamic>) : Bool;
 
 	@:overload(function (color:Table<Dynamic,Dynamic>) : MathModuleLinearToGammaResult {})
 	@:overload(function (lc:Float) : Float {})
 	public static function linearToGamma(lr:Float, lg:Float, lb:Float) : MathModuleLinearToGammaResult;
 
-	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, args:Rest<Float>) : BezierCurve {})
+	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float) : BezierCurve {})
 	public static function newBezierCurve(vertices:Table<Dynamic,Dynamic>) : BezierCurve;
 
 	@:overload(function (seed:Float) : RandomGenerator {})
@@ -56,8 +60,17 @@ extern class MathModule
 
 	public static function setRandomState(state:String) : Void;
 
-	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, args:Rest<Float>) : Table<Dynamic,Dynamic> {})
+	@:overload(function (x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float) : Table<Dynamic,Dynamic> {})
 	public static function triangulate(polygon:Table<Dynamic,Dynamic>) : Table<Dynamic,Dynamic>;
+}
+
+@:multiReturn
+extern class MathModuleColorToBytesResult
+{
+	var rb : Float;
+	var gb : Float;
+	var bb : Float;
+	var ab : Float;
 }
 
 @:multiReturn
@@ -74,6 +87,15 @@ extern class MathModuleGammaToLinearResult
 	var lr : Float;
 	var lg : Float;
 	var lb : Float;
+}
+
+@:multiReturn
+extern class MathModuleColorFromBytesResult
+{
+	var r : Float;
+	var g : Float;
+	var b : Float;
+	var a : Float;
 }
 
 @:multiReturn

@@ -1,5 +1,6 @@
 package love.filesystem;
 import love.Data;
+import love.data.ContainerType;
 import haxe.extern.Rest;
 import lua.Table;
 import lua.UserData;
@@ -8,6 +9,7 @@ import lua.UserData;
 extern class FilesystemModule
 {
 
+	@:overload(function (name:String, data:Data, ?size:Float) : FilesystemModuleAppendResult {})
 	public static function append(name:String, data:String, ?size:Float) : FilesystemModuleAppendResult;
 
 	public static function areSymlinksEnabled() : Bool;
@@ -18,12 +20,14 @@ extern class FilesystemModule
 
 	public static function getCRequirePath() : String;
 
+	@:overload(function (dir:String, callback:Dynamic) : Table<Dynamic,Dynamic> {})
 	public static function getDirectoryItems(dir:String) : Table<Dynamic,Dynamic>;
 
-	public static function getIdentity(name:String) : Void;
+	public static function getIdentity() : String;
 
 	@:overload(function (path:String, info:Table<Dynamic,Dynamic>) : Table<Dynamic,Dynamic> {})
-	public static function getInfo(path:String) : Table<Dynamic,Dynamic>;
+	@:overload(function (path:String, filtertype:FileType, info:Table<Dynamic,Dynamic>) : Table<Dynamic,Dynamic> {})
+	public static function getInfo(path:String, ?filtertype:FileType) : Table<Dynamic,Dynamic>;
 
 	public static function getRealDirectory(filepath:String) : String;
 
@@ -45,23 +49,27 @@ extern class FilesystemModule
 
 	public static function lines(name:String) : Dynamic;
 
-	public static function load(name:String, ?errormsg:String) : Dynamic;
+	public static function load(name:String) : FilesystemModuleLoadResult;
 
-	@:overload(function (archive:String, mountpoint:String, ?appendToPath:String) : Bool {})
-	public static function mount(archive:String, mountpoint:String) : Bool;
+	@:overload(function (filedata:FileData, mountpoint:String, ?appendToPath:Bool) : Bool {})
+	@:overload(function (data:Data, archivename:String, mountpoint:String, ?appendToPath:Bool) : Bool {})
+	public static function mount(archive:String, mountpoint:String, ?appendToPath:Bool) : Bool;
 
-	public static function newFile(filename:String, ?mode:FileMode) : FilesystemModuleNewFileResult;
+	@:overload(function (filename:String, mode:FileMode) : FilesystemModuleNewFileResult {})
+	public static function newFile(filename:String) : File;
 
 	@:overload(function (filepath:String) : FilesystemModuleNewFileDataResult {})
 	public static function newFileData(contents:String, name:String) : FileData;
 
-	public static function read(name:String, ?bytes:Float) : FilesystemModuleReadResult;
+	@:overload(function (container:ContainerType, name:String, ?size:Float) : FilesystemModuleReadResult {})
+	public static function read(name:String, ?size:Float) : FilesystemModuleReadResult;
 
 	public static function remove(name:String) : Bool;
 
 	public static function setCRequirePath(paths:String) : Void;
 
-	public static function setIdentity(name:String, ?appendToPath:Bool) : Void;
+	@:overload(function (name:String) : Void {})
+	public static function setIdentity(name:String) : Void;
 
 	public static function setRequirePath(paths:String) : Void;
 
@@ -78,8 +86,10 @@ extern class FilesystemModule
 @:multiReturn
 extern class FilesystemModuleReadResult
 {
-	var contents : String;
+	var contents : Dynamic;
 	var size : Float;
+	var contents : nil;
+	var error : String;
 }
 
 @:multiReturn
@@ -101,6 +111,13 @@ extern class FilesystemModuleNewFileDataResult
 {
 	var data : FileData;
 	var err : String;
+}
+
+@:multiReturn
+extern class FilesystemModuleLoadResult
+{
+	var chunk : Dynamic;
+	var errormsg : String;
 }
 
 @:multiReturn

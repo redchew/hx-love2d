@@ -9,6 +9,8 @@ extern class RecordingDevice extends Object
 
 	public function getBitDepth() : Float;
 
+	public function getBitDepth() : Float;
+
 	public function getChannelCount() : Float;
 
 	public function getData() : SoundData;

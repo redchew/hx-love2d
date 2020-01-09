@@ -18,6 +18,5 @@ extern class TimerModule
 
 	public static function sleep(s:Float) : Void;
 
-	@:overload(function () : Float {})
-	public static function step() : Void;
+	public static function step() : Float;
 }

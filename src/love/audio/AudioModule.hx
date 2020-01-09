@@ -39,17 +39,20 @@ extern class AudioModule
 
 	public static function isEffectsSupported() : Bool;
 
-	@:overload(function (file:File, type:SourceType) : Source {})
-	@:overload(function (decoder:Decoder) : Source {})
-	@:overload(function (fileData:FileData) : Source {})
-	@:overload(function (soundData:SoundData) : Source {})
-	public static function newSource(filename:String, type:SourceType) : Source;
-
 	public static function newQueueableSource(samplerate:Float, bitdepth:Float, channels:Float, ?buffercount:Float) : Source;
 
-	@:overload(function (source:Source) : Void {})
-	public static function pause() : Void;
+	@:overload(function (file:File, type:SourceType) : Source {})
+	@:overload(function (decoder:Decoder, type:SourceType) : Source {})
+	@:overload(function (data:FileData, type:SourceType) : Source {})
+	@:overload(function (data:SoundData) : Source {})
+	public static function newSource(filename:String, type:SourceType) : Source;
 
+	@:overload(function (source:Source, args:Rest<Source>) : Void {})
+	@:overload(function (sources:Table<Dynamic,Dynamic>) : Void {})
+	public static function pause() : Table<Dynamic,Dynamic>;
+
+	@:overload(function (sources:Table<Dynamic,Dynamic>) : Void {})
+	@:overload(function (source1:Source, source2:Source, args:Rest<Source>) : Void {})
 	public static function play(source:Source) : Void;
 
 	public static function setDistanceModel(model:DistanceModel) : Void;
@@ -61,15 +64,17 @@ extern class AudioModule
 
 	public static function setMixWithSystem(mix:Bool) : Bool;
 
-	public static function setOrientation(fx:Float, fy:Float, fz:Float, ux:Float, uy:Float, uz:Float) : Void;
+	public static function setOrientation(fx, fy, fz:Float, ux, uy, uz:Float) : Void;
 
 	public static function setPosition(x:Float, y:Float, z:Float) : Void;
 
-	public static function setVelocity(x:Float, y:Float, ?z:Float) : Void;
+	public static function setVelocity(x:Float, y:Float, z:Float) : Void;
 
 	public static function setVolume(volume:Float) : Void;
 
 	@:overload(function (source:Source) : Void {})
+	@:overload(function (source1:Source, source2:Source, args:Rest<Source>) : Void {})
+	@:overload(function (sources:Table<Dynamic,Dynamic>) : Void {})
 	public static function stop() : Void;
 }
 
@@ -92,10 +97,6 @@ extern class AudioModuleGetVelocityResult
 @:multiReturn
 extern class AudioModuleGetOrientationResult
 {
-	var fx : Float;
-	var fy : Float;
-	var fz : Float;
-	var ux : Float;
-	var uy : Float;
-	var uz : Float;
+	var fx, fy, fz : Float;
+	var ux, uy, uz : Float;
 }

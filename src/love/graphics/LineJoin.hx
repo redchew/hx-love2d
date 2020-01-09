@@ -3,6 +3,6 @@ package love.graphics;
 abstract LineJoin (String)
 {
 	var Miter = "miter";
-	var Bevel = "bevel";
 	var None = "none";
+	var Bevel = "bevel";
 }

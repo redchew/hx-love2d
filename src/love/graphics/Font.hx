@@ -11,6 +11,8 @@ extern class Font extends Object
 
 	public function getBaseline() : Float;
 
+	public function getDPIScale() : Float;
+
 	public function getDescent() : Float;
 
 	public function getFilter() : FontGetFilterResult;
@@ -19,16 +21,17 @@ extern class Font extends Object
 
 	public function getLineHeight() : Float;
 
-	public function getWidth(line:String) : Float;
+	public function getWidth(text:String) : Float;
 
 	public function getWrap(text:String, wraplimit:Float) : FontGetWrapResult;
 
-	@:overload(function (codepoint:Float) : Bool {})
-	public function hasGlyphs(character:String) : Bool;
+	@:overload(function (character1:String, character2:String) : Bool {})
+	@:overload(function (codepoint1:Float, codepoint2:Float) : Bool {})
+	public function hasGlyphs(text:String) : Bool;
 
 	public function setFallbacks(fallbackfont1:Font, args:Rest<Font>) : Void;
 
-	public function setFilter(min:FilterMode, ?mag:FilterMode, ?anisotropy:Float) : Void;
+	public function setFilter(min:FilterMode, mag:FilterMode, ?anisotropy:Float) : Void;
 
 	public function setLineHeight(height:Float) : Void;
 }

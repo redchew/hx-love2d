@@ -13,9 +13,11 @@ extern class WindowModule
 	@:overload(function (px:Float, py:Float) : WindowModuleFromPixelsResult {})
 	public static function fromPixels(pixelvalue:Float) : Float;
 
-	public static function getDisplayName(displayindex:Float) : String;
-
 	public static function getDPIScale() : Float;
+
+	public static function getDisplayName(?displayindex:Float) : String;
+
+	public static function getDisplayOrientation(?index:Float) : DisplayOrientation;
 
 	public static function getFullscreen() : WindowModuleGetFullscreenResult;
 
@@ -25,11 +27,13 @@ extern class WindowModule
 
 	public static function getMode() : WindowModuleGetModeResult;
 
-	public static function getPixelScale() : Float;
-
 	public static function getPosition() : WindowModuleGetPositionResult;
 
+	public static function getSafeArea() : WindowModuleGetSafeAreaResult;
+
 	public static function getTitle() : String;
+
+	public static function getVSync() : Float;
 
 	public static function hasFocus() : Bool;
 
@@ -49,9 +53,9 @@ extern class WindowModule
 
 	public static function minimize() : Void;
 
-	public static function restore() : Void;
-
 	public static function requestAttention(?continuous:Bool) : Void;
+
+	public static function restore() : Void;
 
 	public static function setDisplaySleepEnabled(enable:Bool) : Void;
 
@@ -62,9 +66,11 @@ extern class WindowModule
 
 	public static function setMode(width:Float, height:Float, flags:Table<Dynamic,Dynamic>) : Bool;
 
-	public static function setPosition(x:Float, y:Float, display:Float) : Void;
+	public static function setPosition(x:Float, y:Float, ?display:Float) : Void;
 
 	public static function setTitle(title:String) : Void;
+
+	public static function setVSync(vsync:Float) : Void;
 
 	@:overload(function (title:String, message:String, buttonlist:Table<Dynamic,Dynamic>, ?type:MessageBoxType, ?attachtowindow:Bool) : Float {})
 	public static function showMessageBox(title:String, message:String, ?type:MessageBoxType, ?attachtowindow:Bool) : Bool;
@@ -80,6 +86,15 @@ extern class WindowModuleFromPixelsResult
 {
 	var x : Float;
 	var y : Float;
+}
+
+@:multiReturn
+extern class WindowModuleGetSafeAreaResult
+{
+	var x : Float;
+	var y : Float;
+	var w : Float;
+	var h : Float;
 }
 
 @:multiReturn

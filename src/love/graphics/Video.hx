@@ -34,7 +34,7 @@ extern class Video extends Drawable
 
 	public function setSource(?source:Source) : Void;
 
-	public function tell(seconds:Float) : Void;
+	public function tell() : Float;
 }
 
 @:multiReturn

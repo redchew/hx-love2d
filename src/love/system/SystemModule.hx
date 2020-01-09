@@ -16,6 +16,8 @@ extern class SystemModule
 
 	public static function getProcessorCount() : Float;
 
+	public static function hasBackgroundMusic() : Bool;
+
 	public static function openURL(url:String) : Bool;
 
 	public static function setClipboardText(text:String) : Void;

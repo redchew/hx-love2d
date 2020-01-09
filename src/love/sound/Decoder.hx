@@ -7,6 +7,8 @@ import lua.UserData;
 extern class Decoder extends Object
 {
 
+	public function clone() : Decoder;
+
 	public function getBitDepth() : Float;
 
 	public function getChannelCount() : Float;

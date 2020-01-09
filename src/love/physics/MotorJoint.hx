@@ -11,7 +11,7 @@ extern class MotorJoint extends Joint
 
 	public function getLinearOffset() : MotorJointGetLinearOffsetResult;
 
-	public function setAngularOffset(angularoffset:Float) : Void;
+	public function setAngularOffset(angleoffset:Float) : Void;
 
 	public function setLinearOffset(x:Float, y:Float) : Void;
 }

@@ -15,7 +15,7 @@ extern class Joint extends Object
 
 	public function getCollideConnected() : Bool;
 
-	public function getReactionForce() : JointGetReactionForceResult;
+	public function getReactionForce(x:Float) : JointGetReactionForceResult;
 
 	public function getReactionTorque(invdt:Float) : Float;
 

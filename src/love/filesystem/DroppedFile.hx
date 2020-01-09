@@ -5,14 +5,14 @@ import haxe.extern.Rest;
 import lua.Table;
 import lua.UserData;
 
-extern class File extends Object
+extern class DroppedFile extends Object
 {
 
 	public function close() : Bool;
 
-	public function flush() : FileFlushResult;
+	public function flush() : DroppedFileFlushResult;
 
-	public function getBuffer() : FileGetBufferResult;
+	public function getBuffer() : DroppedFileGetBufferResult;
 
 	public function getFilename() : String;
 
@@ -26,58 +26,58 @@ extern class File extends Object
 
 	public function lines() : Dynamic;
 
-	public function open(mode:FileMode) : FileOpenResult;
+	public function open(mode:FileMode) : DroppedFileOpenResult;
 
-	@:overload(function (container:ContainerType, ?bytes:Float) : FileReadResult {})
-	public function read(?bytes:Float) : FileReadResult;
+	@:overload(function (container:ContainerType, ?bytes:Float) : DroppedFileReadResult {})
+	public function read(?bytes:Float) : DroppedFileReadResult;
 
 	public function seek(pos:Float) : Bool;
 
-	public function setBuffer(mode:BufferMode, ?size:Float) : FileSetBufferResult;
+	public function setBuffer(mode:BufferMode, ?size:Float) : DroppedFileSetBufferResult;
 
 	public function tell() : Float;
 
-	@:overload(function (data:Data, ?size:Float) : FileWriteResult {})
-	public function write(data:String, ?size:Float) : FileWriteResult;
+	@:overload(function (data:Data, ?size:Float) : DroppedFileWriteResult {})
+	public function write(data:String, ?size:Float) : DroppedFileWriteResult;
 }
 
 @:multiReturn
-extern class FileReadResult
+extern class DroppedFileReadResult
 {
 	var contents : Dynamic;
 	var size : Float;
 }
 
 @:multiReturn
-extern class FileSetBufferResult
+extern class DroppedFileSetBufferResult
 {
 	var success : Bool;
 	var errorstr : String;
 }
 
 @:multiReturn
-extern class FileWriteResult
+extern class DroppedFileWriteResult
 {
 	var success : Bool;
 	var errorstr : String;
 }
 
 @:multiReturn
-extern class FileFlushResult
+extern class DroppedFileFlushResult
 {
 	var success : Bool;
 	var err : String;
 }
 
 @:multiReturn
-extern class FileOpenResult
+extern class DroppedFileOpenResult
 {
 	var ok : Bool;
 	var err : String;
 }
 
 @:multiReturn
-extern class FileGetBufferResult
+extern class DroppedFileGetBufferResult
 {
 	var mode : BufferMode;
 	var size : Float;

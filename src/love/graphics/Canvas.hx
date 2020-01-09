@@ -7,26 +7,32 @@ import lua.UserData;
 extern class Canvas extends Texture
 {
 
+	public function generateMipmaps() : Void;
+
 	public function getDimensions() : CanvasGetDimensionsResult;
 
+	@:overload(function () : CanvasGetFilterResult {})
 	public function getFilter() : CanvasGetFilterResult;
 
 	public function getHeight() : Float;
 
 	public function getMSAA() : Float;
 
+	public function getMipmapMode() : MipmapMode;
+
 	public function getWidth() : Float;
 
 	public function getWrap() : CanvasGetWrapResult;
 
-	@:overload(function (x:Float, y:Float, width:Float, height:Float) : ImageData {})
+	@:overload(function (slice:Float, ?mipmap:Float, x:Float, y:Float, width:Float, height:Float) : ImageData {})
 	public function newImageData() : ImageData;
 
 	public function renderTo(func:Dynamic) : Void;
 
-	public function setFilter(min:FilterMode, ?mag:FilterMode, ?anisotropy:Float) : Void;
+	@:overload(function (min:FilterMode, mag:FilterMode, ?anisotropy:Float) : Void {})
+	public function setFilter(min:FilterMode, mag:FilterMode) : Void;
 
-	public function setWrap(horizontal:WrapMode, ?vertical:WrapMode) : Void;
+	public function setWrap(horiz:WrapMode, vert:WrapMode) : Void;
 }
 
 @:multiReturn
@@ -40,8 +46,8 @@ extern class CanvasGetFilterResult
 @:multiReturn
 extern class CanvasGetWrapResult
 {
-	var horizontal : WrapMode;
-	var vertical : WrapMode;
+	var horiz : WrapMode;
+	var vert : WrapMode;
 }
 
 @:multiReturn

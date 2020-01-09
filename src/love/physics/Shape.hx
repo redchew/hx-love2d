@@ -19,7 +19,7 @@ extern class Shape extends Object
 
 	public function rayCast(x1:Float, y1:Float, x2:Float, y2:Float, maxFraction:Float, tx:Float, ty:Float, tr:Float, ?childIndex:Float) : ShapeRayCastResult;
 
-	public function testPoint(x:Float, y:Float) : Bool;
+	public function testPoint(tx:Float, ty:Float, tr:Float, x:Float, y:Float) : Bool;
 }
 
 @:multiReturn

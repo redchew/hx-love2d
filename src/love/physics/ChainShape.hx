@@ -7,9 +7,9 @@ import lua.UserData;
 extern class ChainShape extends Shape
 {
 
-	public function getChildEdge(index:Float) : Float;
+	public function getChildEdge(index:Float) : EdgeShape;
 
-	public function getNextVertex(?x:Float, ?y:Float) : Void;
+	public function getNextVertex() : ChainShapeGetNextVertexResult;
 
 	public function getPoint(index:Float) : ChainShapeGetPointResult;
 
@@ -25,7 +25,7 @@ extern class ChainShape extends Shape
 }
 
 @:multiReturn
-extern class ChainShapeGetPointResult
+extern class ChainShapeGetPreviousVertexResult
 {
 	var x : Float;
 	var y : Float;
@@ -41,7 +41,14 @@ extern class ChainShapeGetPointsResult
 }
 
 @:multiReturn
-extern class ChainShapeGetPreviousVertexResult
+extern class ChainShapeGetPointResult
+{
+	var x : Float;
+	var y : Float;
+}
+
+@:multiReturn
+extern class ChainShapeGetNextVertexResult
 {
 	var x : Float;
 	var y : Float;

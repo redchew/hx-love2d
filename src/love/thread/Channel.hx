@@ -22,7 +22,7 @@ extern class Channel extends Object
 
 	public function pop() : Dynamic;
 
-	public function push(value:Dynamic) : Void;
+	public function push(value:Dynamic) : Float;
 
 	@:overload(function (value:Dynamic, timeout:Float) : Bool {})
 	public function supply(value:Dynamic) : Bool;

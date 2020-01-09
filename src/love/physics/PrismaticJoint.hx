@@ -21,7 +21,7 @@ extern class PrismaticJoint extends Joint
 
 	public function getMaxMotorForce() : Float;
 
-	public function getMotorForce() : Float;
+	public function getMotorForce(invdt:Float) : Float;
 
 	public function getMotorSpeed() : Float;
 
@@ -31,7 +31,7 @@ extern class PrismaticJoint extends Joint
 
 	public function setLimits(lower:Float, upper:Float) : Void;
 
-	public function setLimitsEnabled(enable:Bool) : Void;
+	public function setLimitsEnabled() : Bool;
 
 	public function setLowerLimit(lower:Float) : Void;
 

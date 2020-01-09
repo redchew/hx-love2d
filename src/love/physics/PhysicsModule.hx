@@ -26,6 +26,7 @@ extern class PhysicsModule
 
 	public static function newFixture(body:Body, shape:Shape, ?density:Float) : Fixture;
 
+	@:overload(function (body1:Body, body2:Body, x1:Float, y1:Float, x2:Float, y2:Float, ?collideConnected:Bool) : FrictionJoint {})
 	public static function newFrictionJoint(body1:Body, body2:Body, x:Float, y:Float, ?collideConnected:Bool) : FrictionJoint;
 
 	public static function newGearJoint(joint1:Joint, joint2:Joint, ?ratio:Float, ?collideConnected:Bool) : GearJoint;
@@ -36,7 +37,7 @@ extern class PhysicsModule
 	public static function newMouseJoint(body:Body, x:Float, y:Float) : MouseJoint;
 
 	@:overload(function (vertices:Table<Dynamic,Dynamic>) : PolygonShape {})
-	public static function newPolygonShape(x1:Float, y1:Float, x2:Float, y2:Float, args:Rest<Float>) : PolygonShape;
+	public static function newPolygonShape(x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, args:Rest<Float>) : PolygonShape;
 
 	@:overload(function (body1:Body, body2:Body, x1:Float, y1:Float, x2:Float, y2:Float, ax:Float, ay:Float, ?collideConnected:Bool) : PrismaticJoint {})
 	@:overload(function (body1:Body, body2:Body, x1:Float, y1:Float, x2:Float, y2:Float, ax:Float, ay:Float, ?collideConnected:Bool, ?referenceAngle:Float) : PrismaticJoint {})
@@ -56,6 +57,7 @@ extern class PhysicsModule
 	@:overload(function (body1:Body, body2:Body, x1:Float, y1:Float, x2:Float, y2:Float, ?collideConnected:Bool, ?referenceAngle:Float) : WeldJoint {})
 	public static function newWeldJoint(body1:Body, body2:Body, x:Float, y:Float, ?collideConnected:Bool) : WeldJoint;
 
+	@:overload(function (body1:Body, body2:Body, x1:Float, y1:Float, x2:Float, y2:Float, ax:Float, ay:Float, ?collideConnected:Bool) : WheelJoint {})
 	public static function newWheelJoint(body1:Body, body2:Body, x:Float, y:Float, ax:Float, ay:Float, ?collideConnected:Bool) : WheelJoint;
 
 	public static function newWorld(?xg:Float, ?yg:Float, ?sleep:Bool) : World;

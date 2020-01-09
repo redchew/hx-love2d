@@ -39,7 +39,7 @@ extern class Fixture extends Object
 
 	public function rayCast(x1:Float, y1:Float, x2:Float, y2:Float, maxFraction:Float, ?childIndex:Float) : FixtureRayCastResult;
 
-	public function setCategory(category1:Float, category2:Float, args:Rest<Float>) : Void;
+	public function setCategory(category1:Float, category2:Float) : Void;
 
 	public function setDensity(density:Float) : Void;
 
@@ -49,7 +49,7 @@ extern class Fixture extends Object
 
 	public function setGroupIndex(group:Float) : Void;
 
-	public function setMask(mask1:Float, mask2:Float, args:Rest<Float>) : Void;
+	public function setMask(mask1:Float, mask2:Float) : Void;
 
 	public function setRestitution(restitution:Float) : Void;
 
@@ -70,8 +70,8 @@ extern class FixtureGetCategoryResult
 @:multiReturn
 extern class FixtureRayCastResult
 {
-	var x : Float;
-	var y : Float;
+	var xn : Float;
+	var yn : Float;
 	var fraction : Float;
 }
 

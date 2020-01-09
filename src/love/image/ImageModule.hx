@@ -1,5 +1,6 @@
 package love.image;
 import love.filesystem.FileData;
+import love.graphics.PixelFormat;
 import haxe.extern.Rest;
 import lua.Table;
 import lua.UserData;
@@ -14,6 +15,7 @@ extern class ImageModule
 	@:overload(function (fileData:FileData) : CompressedImageData {})
 	public static function newCompressedData(filename:String) : CompressedImageData;
 
+	@:overload(function (width:Float, height:Float, ?format:PixelFormat, ?data:String) : ImageData {})
 	@:overload(function (width:Float, height:Float, data:String) : ImageData {})
 	@:overload(function (filename:String) : ImageData {})
 	@:overload(function (filedata:FileData) : ImageData {})

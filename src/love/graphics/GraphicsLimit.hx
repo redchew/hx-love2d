@@ -6,4 +6,9 @@ abstract GraphicsLimit (String)
 	var Texturesize = "texturesize";
 	var Multicanvas = "multicanvas";
 	var Canvasmsaa = "canvasmsaa";
+	var Texturelayers = "texturelayers";
+	var Volumetexturesize = "volumetexturesize";
+	var Cubetexturesize = "cubetexturesize";
+	var Anisotropy = "anisotropy";
+	var Canvasfsaa = "canvasfsaa";
 }

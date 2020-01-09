@@ -17,7 +17,7 @@ extern class RandomGenerator extends Object
 
 	public function randomNormal(?stddev:Float, ?mean:Float) : Float;
 
-	@:overload(function (low:Float, ?high:Float) : Void {})
+	@:overload(function (low:Float, high:Float) : Void {})
 	public function setSeed(seed:Float) : Void;
 
 	public function setState(state:String) : Void;

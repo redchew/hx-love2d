@@ -11,7 +11,7 @@ extern class Quad extends Object
 
 	public function getViewport() : QuadGetViewportResult;
 
-	public function setViewport(x:Float, y:Float, w:Float, h:Float) : Void;
+	public function setViewport(x:Float, y:Float, w:Float, h:Float, sw:Float, sh:Float) : Void;
 }
 
 @:multiReturn

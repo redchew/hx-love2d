@@ -7,6 +7,8 @@ import lua.UserData;
 extern class ImageData extends Data
 {
 
+	@:overload(function (outFile:String) : Void {})
+	@:overload(function (outFile:String, format:ImageFormat) : Void {})
 	public function encode(format:ImageFormat, ?filename:String) : FileData;
 
 	public function getDimensions() : ImageDataGetDimensionsResult;
@@ -17,7 +19,7 @@ extern class ImageData extends Data
 
 	public function getWidth() : Float;
 
-	public function mapPixel(pixelFunction:Dynamic) : Void;
+	public function mapPixel(pixelFunction:Dynamic, ?x:Float, ?y:Float, ?width:Float, ?height:Float) : Void;
 
 	public function paste(source:ImageData, dx:Float, dy:Float, sx:Float, sy:Float, sw:Float, sh:Float) : Void;
 

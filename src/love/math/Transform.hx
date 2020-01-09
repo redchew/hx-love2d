@@ -17,17 +17,18 @@ extern class Transform extends Object
 
 	public function inverseTransformPoint(localX:Float, localY:Float) : TransformInverseTransformPointResult;
 
+	public function isAffine() : Bool;
+
 	public function reset() : Transform;
 
 	public function rotate(angle:Float) : Transform;
 
-	public function scale(sx:Float, sy:Float) : Transform;
+	public function scale(sx:Float, ?sy:Float) : Transform;
 
-	// @:overload(function (layout:MatrixLayout, e1_1:Float, e1_2:Float, args:Rest<Float>, e4_4:Float) : Transform {})
-	// @:overload(function (layout:MatrixLayout, matrix:Table<Dynamic,Dynamic>) : Transform {})
-	// @:overload(function (layout:MatrixLayout, matrix:Table<Dynamic,Dynamic>) : Transform {})
-	public function setMatrix(layout:MatrixLayout, matrix:Table<Dynamic,Dynamic>) : Transform;
-	// public function setMatrix(e1_1:Float, e1_2:Float, args:Rest<Float>, e4_4:Float) : Transform;
+	@:overload(function (layout:MatrixLayout, e1_1:Float, e1_2:Float, args:Rest<Float>) : Transform {})
+	@:overload(function (layout:MatrixLayout, matrix:Table<Dynamic,Dynamic>) : Transform {})
+	@:overload(function (layout:MatrixLayout, matrix:Table<Dynamic,Dynamic>) : Transform {})
+	public function setMatrix(e1_1:Float, e1_2:Float, args:Rest<Float>) : Transform;
 
 	public function setTransformation(x:Float, y:Float, ?angle:Float, ?sx:Float, ?sy:Float, ?ox:Float, ?oy:Float, ?kx:Float, ?ky:Float) : Transform;
 

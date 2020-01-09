@@ -31,7 +31,7 @@ extern class BezierCurve extends Object
 
 	public function scale(s:Float, ?ox:Float, ?oy:Float) : Void;
 
-	public function setControlPoint(i:Float, ox:Float, oy:Float) : Void;
+	public function setControlPoint(i:Float, x:Float, y:Float) : Void;
 
 	public function translate(dx:Float, dy:Float) : Void;
 }

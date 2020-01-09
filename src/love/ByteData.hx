@@ -4,6 +4,6 @@ import haxe.extern.Rest;
 import lua.Table;
 import lua.UserData;
 
-extern class Object extends UserData
+extern class ByteData extends Data
 {
 }

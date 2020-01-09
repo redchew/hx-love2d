@@ -4,4 +4,5 @@ abstract FullscreenType (String)
 {
 	var Desktop = "desktop";
 	var Exclusive = "exclusive";
+	var Normal = "normal";
 }

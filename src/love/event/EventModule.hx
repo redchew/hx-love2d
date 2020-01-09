@@ -14,11 +14,10 @@ extern class EventModule
 
 	public static function pump() : Void;
 
-	public static function push(e:Event, ?a:Dynamic, ?b:Dynamic, ?c:Dynamic, ?d:Dynamic) : Void;
+	public static function push(n:Event, ?a:Dynamic, ?b:Dynamic, ?c:Dynamic, ?d:Dynamic, ?e:Dynamic, ?f:Dynamic, args:Rest<Dynamic>) : Void;
 
-	@:overload(function (?exitstatus:Float) : Void {})
-	@:overload(function (restart:String) : Void {})
-	public static function quit() : Void;
+	@:overload(function ('restart':String) : Void {})
+	public static function quit(?exitstatus:Float) : Void;
 
 	public static function wait() : EventModuleWaitResult;
 }
@@ -26,9 +25,11 @@ extern class EventModule
 @:multiReturn
 extern class EventModuleWaitResult
 {
-	var e : Event;
+	var n : Event;
 	var a : Dynamic;
 	var b : Dynamic;
 	var c : Dynamic;
 	var d : Dynamic;
+	var e : Dynamic;
+	var f : Dynamic;
 }

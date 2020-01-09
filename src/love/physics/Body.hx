@@ -25,15 +25,15 @@ extern class Body extends Object
 
 	public function getAngularVelocity() : Float;
 
-	public function getContactList() : Table<Dynamic,Dynamic>;
+	public function getContacts() : Table<Dynamic,Dynamic>;
 
-	public function getFixtureList() : Table<Dynamic,Dynamic>;
+	public function getFixtures() : Table<Dynamic,Dynamic>;
 
 	public function getGravityScale() : Float;
 
 	public function getInertia() : Float;
 
-	public function getJointList() : Table<Dynamic,Dynamic>;
+	public function getJoints() : Table<Dynamic,Dynamic>;
 
 	public function getLinearDamping() : Float;
 
@@ -55,6 +55,8 @@ extern class Body extends Object
 
 	public function getPosition() : BodyGetPositionResult;
 
+	public function getTransform() : BodyGetTransformResult;
+
 	public function getType() : BodyType;
 
 	public function getUserData() : Dynamic;
@@ -65,7 +67,7 @@ extern class Body extends Object
 
 	public function getWorldPoint(localX:Float, localY:Float) : BodyGetWorldPointResult;
 
-	public function getWorldPoints(x1:Float, y1:Float, x2:Float, y2:Float, args:Rest<Float>) : BodyGetWorldPointsResult;
+	public function getWorldPoints(x1:Float, y1:Float, x2:Float, y2:Float) : BodyGetWorldPointsResult;
 
 	public function getWorldVector(localX:Float, localY:Float) : BodyGetWorldVectorResult;
 
@@ -85,6 +87,8 @@ extern class Body extends Object
 
 	public function isSleepingAllowed() : Bool;
 
+	public function isTouching(otherbody:Body) : Bool;
+
 	public function resetMassData() : Void;
 
 	public function setActive(active:Bool) : Void;
@@ -99,7 +103,7 @@ extern class Body extends Object
 
 	public function setBullet(status:Bool) : Void;
 
-	public function setFixedRotation(fixed:Bool) : Void;
+	public function setFixedRotation(isFixed:Bool) : Void;
 
 	public function setGravityScale(scale:Float) : Void;
 
@@ -116,6 +120,8 @@ extern class Body extends Object
 	public function setPosition(x:Float, y:Float) : Void;
 
 	public function setSleepingAllowed(allowed:Bool) : Void;
+
+	public function setTransform(x:Float, y:Float, angle:Float) : Void;
 
 	public function setType(type:BodyType) : Void;
 
@@ -148,6 +154,13 @@ extern class BodyGetWorldVectorResult
 }
 
 @:multiReturn
+extern class BodyGetLinearVelocityFromWorldPointResult
+{
+	var vx : Float;
+	var vy : Float;
+}
+
+@:multiReturn
 extern class BodyGetLinearVelocityResult
 {
 	var x : Float;
@@ -169,17 +182,18 @@ extern class BodyGetLocalVectorResult
 }
 
 @:multiReturn
-extern class BodyGetLinearVelocityFromWorldPointResult
-{
-	var vx : Float;
-	var vy : Float;
-}
-
-@:multiReturn
 extern class BodyGetWorldCenterResult
 {
 	var x : Float;
 	var y : Float;
+}
+
+@:multiReturn
+extern class BodyGetTransformResult
+{
+	var x : Float;
+	var y : Float;
+	var angle : Float;
 }
 
 @:multiReturn

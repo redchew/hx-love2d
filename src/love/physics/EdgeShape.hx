@@ -7,9 +7,9 @@ import lua.UserData;
 extern class EdgeShape extends Shape
 {
 
-	public function getPoints() : EdgeShapeGetPointsResult;
-
 	public function getNextVertex() : EdgeShapeGetNextVertexResult;
+
+	public function getPoints() : EdgeShapeGetPointsResult;
 
 	public function getPreviousVertex() : EdgeShapeGetPreviousVertexResult;
 

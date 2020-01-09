@@ -9,6 +9,10 @@ extern class Source extends Object
 
 	public function clone() : Source;
 
+	public function getActiveEffects() : Table<Dynamic,Dynamic>;
+
+	public function getAirAbsorption() : Float;
+
 	public function getAttenuationDistances() : SourceGetAttenuationDistancesResult;
 
 	public function getChannelCount() : Float;
@@ -21,9 +25,7 @@ extern class Source extends Object
 
 	public function getEffect(name:String, ?filtersettings:Table<Dynamic,Dynamic>) : Table<Dynamic,Dynamic>;
 
-	public function getActiveEffects() : Table<Dynamic,Dynamic>;
-
-	public function getFilter(?settings:Table<Dynamic,Dynamic>) : Table<Dynamic,Dynamic>;
+	public function getFilter() : Table<Dynamic,Dynamic>;
 
 	public function getFreeBufferCount() : Float;
 
@@ -53,30 +55,33 @@ extern class Source extends Object
 
 	public function queue(sounddata:SoundData) : Bool;
 
-	public function seek(position:Float, ?unit:TimeUnit) : Void;
+	public function seek(offset:Float, ?unit:TimeUnit) : Void;
+
+	public function setAirAbsorption(amount:Float) : Void;
 
 	public function setAttenuationDistances(ref:Float, max:Float) : Void;
 
-	public function setCone(innerAngle:Float, outerAngle:Float, ?outerVolume:Float, ?outerHighGain:Float) : Void;
+	public function setCone(innerAngle:Float, outerAngle:Float, ?outerVolume:Float) : Void;
 
-	public function setDirection(x:Float, y:Float, ?z:Float) : Void;
+	public function setDirection(x:Float, y:Float, z:Float) : Void;
 
 	@:overload(function (name:String, filtersettings:Table<Dynamic,Dynamic>) : Bool {})
 	public function setEffect(name:String, ?enable:Bool) : Bool;
 
+	@:overload(function () : Void {})
 	public function setFilter(settings:Table<Dynamic,Dynamic>) : Bool;
 
 	public function setLooping(loop:Bool) : Void;
 
 	public function setPitch(pitch:Float) : Void;
 
-	public function setPosition(x:Float, y:Float, ?z:Float) : Void;
+	public function setPosition(x:Float, y:Float, z:Float) : Void;
 
-	public function setRelative(enable:Bool) : Void;
+	public function setRelative(?enable:Bool) : Void;
 
 	public function setRolloff(rolloff:Float) : Void;
 
-	public function setVelocity(x:Float, y:Float, ?z:Float) : Void;
+	public function setVelocity(x:Float, y:Float, z:Float) : Void;
 
 	public function setVolume(volume:Float) : Void;
 
@@ -100,7 +105,6 @@ extern class SourceGetConeResult
 	var innerAngle : Float;
 	var outerAngle : Float;
 	var outerVolume : Float;
-	var outerHighGain : Float;
 }
 
 @:multiReturn

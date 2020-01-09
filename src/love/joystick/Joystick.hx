@@ -15,12 +15,16 @@ extern class Joystick extends Object
 
 	public function getButtonCount() : Float;
 
+	public function getDeviceInfo() : JoystickGetDeviceInfoResult;
+
 	public function getGUID() : String;
 
 	public function getGamepadAxis(axis:GamepadAxis) : Float;
 
-	@:overload(function (button:GamepadAxis) : JoystickGetGamepadMappingResult {})
+	@:overload(function (button:GamepadButton) : JoystickGetGamepadMappingResult {})
 	public function getGamepadMapping(axis:GamepadAxis) : JoystickGetGamepadMappingResult;
+
+	public function getGamepadMappingString() : String;
 
 	public function getHat(hat:Float) : JoystickHat;
 
@@ -34,16 +38,16 @@ extern class Joystick extends Object
 
 	public function isConnected() : Bool;
 
-	public function isDown(args:Rest<Float>) : Bool;
+	public function isDown(buttonN:Float) : Bool;
 
 	public function isGamepad() : Bool;
 
-	public function isGamepadDown(args:Rest<GamepadButton>) : Bool;
+	public function isGamepadDown(buttonN:GamepadButton) : Bool;
 
 	public function isVibrationSupported() : Bool;
 
 	@:overload(function () : Bool {})
-	@:overload(function (left:Float, right:Float, duration:Float) : Bool {})
+	@:overload(function (left:Float, right:Float, ?duration:Float) : Bool {})
 	public function setVibration(left:Float, right:Float) : Bool;
 }
 
@@ -60,6 +64,14 @@ extern class JoystickGetIDResult
 {
 	var id : Float;
 	var instanceid : Float;
+}
+
+@:multiReturn
+extern class JoystickGetDeviceInfoResult
+{
+	var vendorID : Float;
+	var productID : Float;
+	var productVersion : Float;
 }
 
 @:multiReturn

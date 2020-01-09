@@ -9,10 +9,6 @@ extern class RevoluteJoint extends Joint
 
 	public function areLimitsEnabled() : Bool;
 
-	public function setLimitsEnabled(enable:Bool) : Void;
-
-	public function setMotorEnabled(enable:Bool) : Void;
-
 	public function getJointAngle() : Float;
 
 	public function getJointSpeed() : Float;
@@ -29,13 +25,19 @@ extern class RevoluteJoint extends Joint
 
 	public function getUpperLimit() : Float;
 
+	public function hasLimitsEnabled() : Bool;
+
 	public function isMotorEnabled() : Bool;
 
 	public function setLimits(lower:Float, upper:Float) : Void;
 
+	public function setLimitsEnabled(enable:Bool) : Void;
+
 	public function setLowerLimit(lower:Float) : Void;
 
 	public function setMaxMotorTorque(f:Float) : Void;
+
+	public function setMotorEnabled(enable:Bool) : Void;
 
 	public function setMotorSpeed(s:Float) : Void;
 

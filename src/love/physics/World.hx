@@ -9,9 +9,9 @@ extern class World extends Object
 
 	public function destroy() : Void;
 
-	public function getBodyCount() : Float;
+	public function getBodies() : Table<Dynamic,Dynamic>;
 
-	public function getBodyList() : Table<Dynamic,Dynamic>;
+	public function getBodyCount() : Float;
 
 	public function getCallbacks() : WorldGetCallbacksResult;
 
@@ -19,13 +19,13 @@ extern class World extends Object
 
 	public function getContactFilter() : Dynamic;
 
-	public function getContactList() : Table<Dynamic,Dynamic>;
+	public function getContacts() : Table<Dynamic,Dynamic>;
 
 	public function getGravity() : WorldGetGravityResult;
 
 	public function getJointCount() : Float;
 
-	public function getJointList() : Table<Dynamic,Dynamic>;
+	public function getJoints() : Table<Dynamic,Dynamic>;
 
 	public function isDestroyed() : Bool;
 
@@ -35,7 +35,7 @@ extern class World extends Object
 
 	public function queryBoundingBox(topLeftX:Float, topLeftY:Float, bottomRightX:Float, bottomRightY:Float, callback:Dynamic) : Void;
 
-	public function rayCast(x1:Float, y1:Float, x2:Float, y2:Float, callback:Dynamic) : Void;
+	public function rayCast(fixture:Fixture, x:Float, y:Float, xn:Float, yn:Float, fraction:Float) : Float;
 
 	public function setCallbacks(beginContact:Dynamic, endContact:Dynamic, preSolve:Dynamic, postSolve:Dynamic) : Void;
 
@@ -43,7 +43,7 @@ extern class World extends Object
 
 	public function setGravity(x:Float, y:Float) : Void;
 
-	public function setSleepingAllowed(allowSleep:Bool) : Void;
+	public function setSleepingAllowed(allow:Bool) : Void;
 
 	public function translateOrigin(x:Float, y:Float) : Void;
 

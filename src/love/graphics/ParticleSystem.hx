@@ -11,17 +11,19 @@ extern class ParticleSystem extends Drawable
 
 	public function emit(numparticles:Float) : Void;
 
-	public function getCount() : Float;
-
-	public function getAreaSpread() : ParticleSystemGetAreaSpreadResult;
-
 	public function getBufferSize() : Float;
 
 	public function getColors() : ParticleSystemGetColorsResult;
 
+	public function getCount() : Float;
+
 	public function getDirection() : Float;
 
+	public function getEmissionArea() : ParticleSystemGetEmissionAreaResult;
+
 	public function getEmissionRate() : Float;
+
+	public function getEmitterLifetime() : Float;
 
 	public function getInsertMode() : ParticleInsertMode;
 
@@ -29,23 +31,21 @@ extern class ParticleSystem extends Drawable
 
 	public function getLinearDamping() : ParticleSystemGetLinearDampingResult;
 
-	public function getEmitterLifetime() : Float;
-
 	public function getOffset() : ParticleSystemGetOffsetResult;
 
 	public function getParticleLifetime() : ParticleSystemGetParticleLifetimeResult;
 
-	public function getQuads() : Table<Dynamic,Dynamic>;
-
 	public function getPosition() : ParticleSystemGetPositionResult;
+
+	public function getQuads() : Table<Dynamic,Dynamic>;
 
 	public function getRadialAcceleration() : ParticleSystemGetRadialAccelerationResult;
 
 	public function getRotation() : ParticleSystemGetRotationResult;
 
-	public function getSizes() : ParticleSystemGetSizesResult;
-
 	public function getSizeVariation() : Float;
+
+	public function getSizes() : ParticleSystemGetSizesResult;
 
 	public function getSpeed() : ParticleSystemGetSpeedResult;
 
@@ -55,9 +55,9 @@ extern class ParticleSystem extends Drawable
 
 	public function getSpread() : Float;
 
-	public function getTexture() : Texture;
-
 	public function getTangentialAcceleration() : ParticleSystemGetTangentialAccelerationResult;
+
+	public function getTexture() : Texture;
 
 	public function hasRelativeRotation() : Bool;
 
@@ -73,13 +73,13 @@ extern class ParticleSystem extends Drawable
 
 	public function reset() : Void;
 
-	public function setAreaSpread(distribution:AreaSpreadDistribution, dx:Float, dy:Float) : Void;
+	public function setBufferSize(size:Float) : Void;
 
-	public function setBufferSize(buffer:Float) : Void;
-
-	public function setColors(r1:Float, g1:Float, b1:Float, a1:Float, r2:Float, g2:Float, b2:Float, a2:Float, args:Rest<Float>) : Void;
+	public function setColors(r1:Float, g1:Float, b1:Float, a1:Float, r2:Float, g2:Float, b2:Float, a2:Float, r8:Float, g8:Float, b8:Float, a8:Float) : Void;
 
 	public function setDirection(direction:Float) : Void;
+
+	public function setEmissionArea(distribution:AreaSpreadDistribution, dx:Float, dy:Float, ?angle:Float, ?directionRelativeToCenter:Bool) : Void;
 
 	public function setEmissionRate(rate:Float) : Void;
 
@@ -87,9 +87,9 @@ extern class ParticleSystem extends Drawable
 
 	public function setInsertMode(mode:ParticleInsertMode) : Void;
 
-	public function setLinearAcceleration(xmin:Float, ?ymin:Float, ?xmax:Float, ?ymax:Float) : Void;
+	public function setLinearAcceleration(xmin:Float, ymin:Float, ?xmax:Float, ?ymax:Float) : Void;
 
-	public function setLinearDamping(min:Float, max:Float) : Void;
+	public function setLinearDamping(min:Float, ?max:Float) : Void;
 
 	public function setOffset(x:Float, y:Float) : Void;
 
@@ -106,9 +106,9 @@ extern class ParticleSystem extends Drawable
 
 	public function setRotation(min:Float, ?max:Float) : Void;
 
-	public function setSizes(size1:Float, size2:Float, args:Rest<Float>) : Void;
-
 	public function setSizeVariation(variation:Float) : Void;
+
+	public function setSizes(size1:Float, size2:Float, size8:Float) : Void;
 
 	public function setSpeed(min:Float, ?max:Float) : Void;
 
@@ -118,9 +118,9 @@ extern class ParticleSystem extends Drawable
 
 	public function setSpread(spread:Float) : Void;
 
-	public function setTexture(texture:Texture) : Void;
-
 	public function setTangentialAcceleration(min:Float, ?max:Float) : Void;
+
+	public function setTexture(texture:Texture) : Void;
 
 	public function start() : Void;
 
@@ -155,8 +155,8 @@ extern class ParticleSystemGetRadialAccelerationResult
 @:multiReturn
 extern class ParticleSystemGetOffsetResult
 {
-	var x : Float;
-	var y : Float;
+	var ox : Float;
+	var oy : Float;
 }
 
 @:multiReturn
@@ -181,10 +181,13 @@ extern class ParticleSystemGetParticleLifetimeResult
 }
 
 @:multiReturn
-extern class ParticleSystemGetTangentialAccelerationResult
+extern class ParticleSystemGetEmissionAreaResult
 {
-	var min : Float;
-	var max : Float;
+	var distribution : AreaSpreadDistribution;
+	var dx : Float;
+	var dy : Float;
+	var angle : Float;
+	var directionRelativeToCenter : Bool;
 }
 
 @:multiReturn
@@ -198,6 +201,10 @@ extern class ParticleSystemGetColorsResult
 	var g2 : Float;
 	var b2 : Float;
 	var a2 : Float;
+	var r8 : Float;
+	var g8 : Float;
+	var b8 : Float;
+	var a8 : Float;
 }
 
 @:multiReturn
@@ -212,6 +219,7 @@ extern class ParticleSystemGetSpinResult
 {
 	var min : Float;
 	var max : Float;
+	var variation : Float;
 }
 
 @:multiReturn
@@ -219,12 +227,12 @@ extern class ParticleSystemGetSizesResult
 {
 	var size1 : Float;
 	var size2 : Float;
+	var size8 : Float;
 }
 
 @:multiReturn
-extern class ParticleSystemGetAreaSpreadResult
+extern class ParticleSystemGetTangentialAccelerationResult
 {
-	var distribution : AreaSpreadDistribution;
-	var dx : Float;
-	var dy : Float;
+	var min : Float;
+	var max : Float;
 }
