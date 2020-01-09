@@ -5,8 +5,8 @@
     "license": "BSD",
     "tags": ["love2d"],
     "description": "Haxe Extern for Love2D",
-    "version": "0.1.1",
-    "releasenote": "fixed unmatched package path",
+    "version": "0.11.3",
+    "releasenote": "",
     "contributors": ["redchew"],
     "dependencies": {}
 }
